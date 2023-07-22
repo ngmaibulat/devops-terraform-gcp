@@ -24,7 +24,8 @@ resource "google_storage_bucket" "bucket" {
 
 resource "null_resource" "upload_website" {
   provisioner "local-exec" {
-    command = "gsutil -m cp -r ../../data/* gs://${google_storage_bucket.bucket.name}"
+    # command = "gsutil -m cp -r ../../data/* gs://${google_storage_bucket.bucket.name}"
+    command = "bash scripts/deploy.sh ${google_storage_bucket.bucket.name}"
   }
 
   triggers = {
@@ -39,4 +40,44 @@ resource "google_storage_bucket_iam_binding" "public_read_access" {
   members = [
     "allUsers",
   ]
+}
+
+data "google_compute_image" "image" {
+  family  = "ubuntu-minimal-2204-lts"
+  project = "ubuntu-os-cloud"
+}
+
+resource "google_compute_instance" "default" {
+
+  name         = "test"
+  machine_type = "e2-micro"
+  zone         = "us-east1-b"
+
+  tags = ["foo", "bar"]
+
+  boot_disk {
+    initialize_params {
+      # image = "ubuntu/ubuntu-minimal-2204-lts"
+      image = data.google_compute_image.image.self_link
+      labels = {
+        my_label = "value"
+      }
+    }
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral public IP
+    }
+  }
+
+  metadata = {
+    foo      = "bar"
+    ssh-keys = "aibulat:${file("~/.ssh/id_rsa.pub")}"
+  }
+
+  metadata_startup_script = "sudo apt update; sudo apt install -y nala; sudo nala install -y neofetch"
+
 }

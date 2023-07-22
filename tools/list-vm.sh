@@ -1,0 +1,4 @@
+
+gcloud compute instances list
+
+

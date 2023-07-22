@@ -1,0 +1,5 @@
+
+
+gcloud compute zones list
+
+
