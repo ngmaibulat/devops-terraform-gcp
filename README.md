@@ -1,4 +1,14 @@
-# devops-terraform-gcp
+# Terraform with GCP
 
--   host website
--   intergrate with CDN
+### Prerequisites
+
+-   terraform
+-   gcloud
+-   GCP project created
+-   GCP service account created
+
+### Resources
+
+-   Storage Bucket
+-   VM
+-   Load Balancer

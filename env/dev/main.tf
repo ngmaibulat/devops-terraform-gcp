@@ -47,9 +47,32 @@ data "google_compute_image" "image" {
   project = "ubuntu-os-cloud"
 }
 
+data "template_file" "init" {
+  count = 3
+
+  template = file("scripts/init.sh")
+
+  vars = {
+    index = count.index
+  }
+}
+
+resource "google_compute_firewall" "allow_http_https" {
+  name    = "allow-http-https"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "443"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+}
+
 resource "google_compute_instance" "default" {
 
-  name         = "test"
+  count        = 3
+  name         = "srv-${count.index}"
   machine_type = "e2-micro"
   zone         = "us-east1-b"
 
@@ -78,6 +101,8 @@ resource "google_compute_instance" "default" {
     ssh-keys = "aibulat:${file("~/.ssh/id_rsa.pub")}"
   }
 
-  metadata_startup_script = "sudo apt update; sudo apt install -y nala; sudo nala install -y neofetch"
+  # metadata_startup_script = "sudo apt update; sudo apt install -y nala; sudo nala install -y neofetch"
+  # metadata_startup_script = file("scripts/init.sh")
+  metadata_startup_script = data.template_file.init[count.index].rendered
 
 }
