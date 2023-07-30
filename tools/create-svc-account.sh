@@ -14,6 +14,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SVC_
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SVC_ACCOUNT_EMAIL --role roles/run.admin
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SVC_ACCOUNT_EMAIL --role roles/storage.admin
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SVC_ACCOUNT_EMAIL --role roles/compute.admin
+gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SVC_ACCOUNT_EMAIL --role roles/dns.admin
 
 ### create json key
 gcloud iam service-accounts keys create key.json --iam-account $SVC_ACCOUNT_EMAIL
