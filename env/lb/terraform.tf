@@ -1,0 +1,42 @@
+terraform {
+
+  required_providers {
+
+    aws = {
+      source  = "hashicorp/aws"
+      version = "> 5.7.0"
+    }
+
+    google = {
+      source  = "hashicorp/google"
+      version = "> 4.70.0"
+    }
+
+  }
+
+  backend "s3" {
+    bucket = "ngm-tfstate"
+    key    = "demos/gcp/terraform.tfstate"
+    region = "eu-central-1"
+  }
+
+  required_version = "> 1.5.0"
+}
+
+
+provider "aws" {
+  region = var.aws_region
+}
+
+
+provider "google" {
+  credentials = file("../../key.json")
+  project     = var.gcp_project
+  region      = var.gcp_region
+}
+
+provider "google-beta" {
+  credentials = file("../../key.json")
+  project     = var.gcp_project
+  region      = var.gcp_region
+}

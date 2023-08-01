@@ -1,5 +1,7 @@
+
+
 resource "google_compute_instance_template" "instance_template" {
-  name_prefix  = "instance-template-"
+  name_prefix  = "vm-template-"
   machine_type = "e2-micro"
 
   disk {
@@ -9,12 +11,24 @@ resource "google_compute_instance_template" "instance_template" {
   }
 
   network_interface {
-    network = google_compute_network.vpc_network.self_link
+    network    = google_compute_network.vpc_network.self_link
+    subnetwork = google_compute_subnetwork.subnet1.self_link
+
+    access_config {
+      // Ephemeral public IP
+    }
   }
 
   lifecycle {
     create_before_destroy = true
   }
+
+  metadata = {
+    foo      = "bar"
+    ssh-keys = "aibulat:${file("~/.ssh/id_rsa.pub")}"
+  }
+
+  metadata_startup_script = data.template_file.init[1].rendered
 }
 
 resource "google_compute_instance_group_manager" "instance_group_manager" {
