@@ -1,0 +1,18 @@
+-   URL Maps in LB: balance to VM and Bucket
+-   Create VM template, deploy MIG from that template
+-   Web tool: make high cpu, reboot, stop web server
+-   demo Auto Scaling
+-   demo Auto Healing
+-   demo accessing metadata
+-   startup script vs init script
+-   persistent disks
+-   stateless vs statefull MIG
+-   CloudFlare + MIG
+-   use CockroachDB
+-   run migrations via Terraform
+-   deploy Flask
+-   deploy FastAPI
+-   deploy Django
+-   deploy Laravel
+-   deploy Symfony
+-   run PlayWright tests

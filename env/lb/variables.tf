@@ -5,6 +5,11 @@ variable "gcp_region" {
   description = "GCP region"
 }
 
+variable "gcp_zone" {
+  type        = string
+  description = "Availability Zone inside GCP region"
+}
+
 variable "gcp_project" {
   type        = string
   description = "GCP project"
