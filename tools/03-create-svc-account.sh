@@ -18,3 +18,10 @@ gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SVC_
 
 ### create json key
 gcloud iam service-accounts keys create key.json --iam-account $SVC_ACCOUNT_EMAIL
+
+
+### make one liner key
+
+cat key.json| jq -c > key-one-line.json
+cat key-one-line.json | pbcopy
+export GOOGLE_CREDENTIALS=`cat key-one-line.json`

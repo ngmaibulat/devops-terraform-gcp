@@ -15,3 +15,8 @@ variable "aws_region" {
   description = "AWS region"
   default     = "eu-central-1"
 }
+
+variable "SSH_KEY_PUB" {
+  type        = string
+  description = "SSH Public Key"
+}

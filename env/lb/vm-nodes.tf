@@ -67,7 +67,7 @@ resource "google_compute_instance_group_manager" "instance_group_manager" {
 
 
 resource "google_compute_autoscaler" "default" {
-  provider = google-beta
+  provider = google
   name     = "autoscaler"
   zone     = var.gcp_zone
   target   = google_compute_instance_group_manager.instance_group_manager.id

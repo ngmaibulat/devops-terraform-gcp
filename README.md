@@ -5,7 +5,10 @@
 -   terraform
 -   gcloud
 -   GCP project created
+-   Set GCP project as default in gcloud
+-   In GCP project: billing enabled, required APIs enabled
 -   GCP service account created
+-   GCP service account has required roles
 
 ### GCP Labs
 

@@ -26,7 +26,8 @@ resource "null_resource" "upload_website" {
 
   provisioner "local-exec" {
     # command = "gsutil -m cp -r ../../data/* gs://${google_storage_bucket.bucket.name}"
-    command = "bash scripts/deploy.sh ${google_storage_bucket.bucket.name}"
+    # command = "bash scripts/deploy.sh ${google_storage_bucket.bucket.name}"
+    command = "ls -la"
   }
 
   triggers = {
@@ -99,15 +100,15 @@ resource "google_compute_instance" "default" {
 
   metadata = {
     foo      = "bar"
-    ssh-keys = "aibulat:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "aibulat:${var.SSH_KEY_PUB}"
   }
 
   # metadata_startup_script = "sudo apt update; sudo apt install -y nala; sudo nala install -y neofetch"
   # metadata_startup_script = file("scripts/init.sh")
   metadata_startup_script = data.template_file.init[count.index].rendered
 
-  provisioner "local-exec" {
-    command = "ssh-keygen -R ${self.network_interface.0.access_config.0.nat_ip}"
-  }
+  # provisioner "local-exec" {
+  #   command = "ssh-keygen -R ${self.network_interface.0.access_config.0.nat_ip}"
+  # }
 
 }

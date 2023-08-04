@@ -1,5 +1,13 @@
 terraform {
 
+  cloud {
+    organization = "example-org-e380b0"
+
+    workspaces {
+      name = "gcp"
+    }
+  }
+
   required_providers {
 
     aws = {
@@ -14,11 +22,11 @@ terraform {
 
   }
 
-  backend "s3" {
-    bucket = "ngm-tfstate"
-    key    = "demos/gcp/terraform.tfstate"
-    region = "eu-central-1"
-  }
+  # backend "s3" {
+  #   bucket = "ngm-tfstate"
+  #   key    = "demos/gcp/terraform.tfstate"
+  #   region = "eu-central-1"
+  # }
 
   required_version = "> 1.5.0"
 }
@@ -30,7 +38,7 @@ provider "aws" {
 
 
 provider "google" {
-  credentials = file("../../key.json")
-  project     = var.gcp_project
-  region      = var.gcp_region
+  # credentials = file("../../key.json")
+  project = var.gcp_project
+  region  = var.gcp_region
 }

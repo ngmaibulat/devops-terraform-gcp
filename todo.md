@@ -1,4 +1,5 @@
 -   URL Maps in LB: balance to VM and Bucket
+-   Enable CDN
 -   Create VM template, deploy MIG from that template
 -   Web tool: make high cpu, reboot, stop web server
 -   demo Auto Scaling

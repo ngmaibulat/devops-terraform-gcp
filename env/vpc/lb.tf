@@ -1,31 +1,4 @@
 
-module "gce-lb-http" {
-  source  = "GoogleCloudPlatform/lb-http/google"
-  version = "9.1.0" # specify the version based on your requirement
-
-  project     = var.gcp_project
-  name        = "lb-01"
-  target_tags = ["instance-tag"] # ensure your instances have this tag
-
-  backends = {
-    "0" = {
-      description                  = "instance group"
-      protocol                     = "HTTP"
-      port_name                    = "http"
-      timeout_sec                  = 10
-      connection_drain_timeout_sec = 10
-      enable_cdn                   = false
-      session_affinity             = "NONE"
-      backend = [{
-        group = google_compute_instance_group_manager.instance_group_manager.instance_group
-      }]
-    }
-  }
-}
-
-
-
-
 # resource "google_compute_instance_group" "default" {
 #   name        = "terraform-instance-group"
 #   description = "Terraform test instance group"
