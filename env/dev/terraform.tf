@@ -1,12 +1,12 @@
 terraform {
 
-  # cloud {
-  #   organization = "example-org-e380b0"
+  cloud {
+    organization = "example-org-e380b0"
 
-  #   workspaces {
-  #     name = "gcp"
-  #   }
-  # }
+    workspaces {
+      name = "devops-terraform-gcp"
+    }
+  }
 
   required_providers {
 
