@@ -22,18 +22,18 @@ resource "google_storage_bucket" "bucket" {
 }
 
 
-resource "null_resource" "upload_website" {
+# resource "null_resource" "upload_website" {
 
-  provisioner "local-exec" {
-    # command = "gsutil -m cp -r ../../data/* gs://${google_storage_bucket.bucket.name}"
-    # command = "bash scripts/deploy.sh ${google_storage_bucket.bucket.name}"
-    command = "ls -la"
-  }
+#   provisioner "local-exec" {
+#     # command = "gsutil -m cp -r ../../data/* gs://${google_storage_bucket.bucket.name}"
+#     # command = "bash scripts/deploy.sh ${google_storage_bucket.bucket.name}"
+#     command = "ls -la"
+#   }
 
-  triggers = {
-    bucket = google_storage_bucket.bucket.id
-  }
-}
+#   triggers = {
+#     bucket = google_storage_bucket.bucket.id
+#   }
+# }
 
 resource "google_storage_bucket_iam_binding" "public_read_access" {
   bucket = google_storage_bucket.bucket.name
