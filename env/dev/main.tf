@@ -59,13 +59,13 @@ data "template_file" "init" {
   }
 }
 
-resource "google_compute_firewall" "allow_http_https" {
-  name    = "allow-http-https"
+resource "google_compute_firewall" "default" {
+  name    = "default"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "443"]
+    ports    = ["22", "80", "443"]
   }
 
   source_ranges = ["0.0.0.0/0"]
